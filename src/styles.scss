@@ -1,0 +1,79 @@
+#any-text {
+  outline: salmon solid 1px;
+  margin: 10px 0;
+}
+
+#any-text-with-scroll {
+  outline: lime solid 1px;
+  margin: 10px 0;
+
+  width: 50%;
+  height: 300px;
+
+  overflow: scroll;
+}
+
+#textarea-fixed-size {
+  resize: none;
+  outline: deeppink solid 1px;
+  margin: 10px 0;
+}
+
+#textarea-adjustable-size {
+  outline: red solid 1px;
+  margin: 10px 0;
+}
+
+#contenteditable-raw {
+  outline: green solid 1px;
+  margin: 10px 0;
+}
+
+#contenteditable-with-tags {
+  outline: blue solid 1px;
+  margin: 10px 0;
+}
+
+#contenteditable-mixed {
+  outline: orange solid 1px;
+  margin: 10px 0;
+}
+
+#input {
+  outline: purple solid 1px;
+  margin: 10px 0;
+}
+
+.highlight {
+  position: absolute;
+
+  &:after {
+    content: "";
+    background: var(--background);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    bottom: 0;
+    right: 0;
+    height: 2px;
+  }
+
+  .highlight-message {
+    display: none;
+    position: absolute;
+    background: #f6f6f6;
+    color: #222222;
+    border-radius: 5px;
+    border: 1px solid #a6a6a6;
+    min-width: 200px;
+    padding: 10px;
+    box-shadow: 0 0 5px #585858;
+    top: 10px;
+    left: -50%;
+    z-index: 1000000;
+  }
+
+  &:hover .highlight-message {
+    display: block;
+  }
+}
