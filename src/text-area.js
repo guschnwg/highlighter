@@ -8,16 +8,15 @@ export default class TextArea extends Highlight {
 
     this.createMirror();
 
-    this.originalElement.addEventListener("input", () => this.positionMirror());
-    const resizeObserver = new ResizeObserver(() => this.positionMirror());
+    this.process = this.process.bind(this);
+
+    this.originalElement.addEventListener("input", this.process);
+
+    const resizeObserver = new ResizeObserver(this.process);
     resizeObserver.observe(this.originalElement);
 
-    // Remove original one, just to make sure we reposition the mirror first
     this.originalElement.removeEventListener("scroll", super.process);
-    this.originalElement.addEventListener("scroll", () => {
-      this.positionMirror();
-      super.process();
-    });
+    this.originalElement.addEventListener("scroll", this.process);
   }
 
   createMirror() {
@@ -33,7 +32,7 @@ export default class TextArea extends Highlight {
 
   positionMirror() {
     const { top, left } = this.originalElement.getBoundingClientRect();
-    const textAreaStyle = getComputedStyle(this.originalElement, "");
+    const textAreaStyle = getComputedStyle(this.originalElement);
 
     this.mirror.style.cssText = textAreaStyle.cssText;
     this.mirror.style.position = "absolute";
@@ -45,11 +44,21 @@ export default class TextArea extends Highlight {
     this.mirror.style.marginLeft = "";
     this.mirror.style.marginRight = "";
     this.mirror.style.marginBottom = "";
+    this.mirror.style.marginBlockStart = "";
+    this.mirror.style.marginBlockEnd = "";
+    this.mirror.style.marginInlineStart = "";
+    this.mirror.style.marginInlineEnd = "";
     this.mirror.style.zIndex = -9999999;
     this.mirror.style.opacity = 0;
     this.mirror.textContent = this.originalElement.value;
 
     this.mirror.scrollTop = this.originalElement.scrollTop;
     this.mirror.scrollLeft = this.originalElement.scrollLeft;
+  }
+
+  process() {
+    this.positionMirror();
+
+    super.process();
   }
 }

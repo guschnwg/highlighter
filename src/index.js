@@ -4,6 +4,8 @@ import TextArea from "./text-area";
 import { nonBlockingLoop } from "./utils";
 import Highlight from "./highlight";
 
+const COLORS = ['deeppink', 'red', 'green', 'blue', 'yellow', 'orange', 'purple']
+
 class Highlighter {
   constructor(lookup) {
     this.elements = [];
@@ -16,6 +18,8 @@ class Highlighter {
   }
 
   addElement(element) {
+    element.style.outline = COLORS[this.elements.length % COLORS.length] + ' solid 1px';
+
     if (element.isContentEditable) {
       this.elements.push(new ContentEditable(element, this.lookup));
     } else if (element.tagName === "TEXTAREA") {
@@ -39,8 +43,9 @@ class Highlighter {
 }
 
 const highlighter = new Highlighter("voluptate");
-highlighter.addElement(document.getElementById("any-text"));
-highlighter.addElement(document.getElementById("any-text-with-scroll"));
-highlighter.addElements(document.querySelectorAll("[contenteditable]"));
-highlighter.addElements(document.querySelectorAll("textarea"));
+// highlighter.addElement(document.getElementById("any-text"));
+// highlighter.addElement(document.getElementById("any-text-with-scroll"));
+// highlighter.addElements(document.querySelectorAll("[contenteditable]"));
+// highlighter.addElements(document.querySelectorAll("textarea"));
+highlighter.addElement(document.getElementById("textarea-fixed-size"));
 highlighter.process();

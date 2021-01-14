@@ -8,7 +8,9 @@ export default class Highlight {
     this.highlightContainer = document.body;
 
     this.nodes = this.textNodesUnder();
-    this.element.addEventListener("scroll", () => this.process());
+
+    this.process = this.process.bind(this);
+    this.element.addEventListener("scroll", this.process);
   }
 
   removeHighlights() {
