@@ -69,3 +69,12 @@
     display: block;
   }
 }
+
+#contenteditable-with-scroll {
+  margin: 10px 0;
+
+  width: 50%;
+  height: 300px;
+
+  overflow: scroll;
+}

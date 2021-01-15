@@ -86,10 +86,10 @@ export default class Highlight {
       const left = Math.floor(leftTop + window.scrollX);
 
       if (
-        top < elementPosition.top ||
-        top > elementPosition.top + elementPosition.height ||
-        left < elementPosition.left ||
-        left > elementPosition.left + elementPosition.width
+        top < elementPosition.top + window.scrollY ||
+        top > elementPosition.top + window.scrollY + elementPosition.height ||
+        left < elementPosition.left + window.scrollX ||
+        left > elementPosition.left + window.scrollX + elementPosition.width
       ) {
         continue;
       }

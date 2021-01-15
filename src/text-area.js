@@ -50,6 +50,7 @@ export default class TextArea extends Highlight {
     this.mirror.style.marginInlineEnd = "";
     this.mirror.style.zIndex = -9999999;
     this.mirror.style.opacity = 0;
+    this.mirror.style.resize = 'none';
     this.mirror.textContent = this.originalElement.value;
 
     this.mirror.scrollTop = this.originalElement.scrollTop;

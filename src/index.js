@@ -1,6 +1,7 @@
 import "./styles.scss";
 import ContentEditable from "./content-editable";
 import TextArea from "./text-area";
+import Input from "./input";
 import { nonBlockingLoop } from "./utils";
 import Highlight from "./highlight";
 
@@ -24,6 +25,8 @@ class Highlighter {
       this.elements.push(new ContentEditable(element, this.lookup));
     } else if (element.tagName === "TEXTAREA") {
       this.elements.push(new TextArea(element, this.lookup));
+    } else if (element.tagName === "INPUT") {
+      this.elements.push(new Input(element, this.lookup));
     } else {
       this.elements.push(new Highlight(element, this.lookup));
     }
@@ -43,9 +46,15 @@ class Highlighter {
 }
 
 const highlighter = new Highlighter("voluptate");
+
 // highlighter.addElement(document.getElementById("any-text"));
 // highlighter.addElement(document.getElementById("any-text-with-scroll"));
+
 // highlighter.addElements(document.querySelectorAll("[contenteditable]"));
-// highlighter.addElements(document.querySelectorAll("textarea"));
-highlighter.addElement(document.getElementById("textarea-fixed-size"));
+
+// highlighter.addElement(document.getElementById("textarea-fixed-size"));
+// highlighter.addElement(document.getElementById("textarea-adjustable-size"));
+
+highlighter.addElements(document.querySelectorAll("input"));
+
 highlighter.process();
